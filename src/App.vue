@@ -1,31 +1,53 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div class="container">
+        
+        <Header>
+            
+        </Header>
+        <transition 
+        mode="out-in"
+       appear 
+       name="slide"
+        
+        >
+        
+        <router-view :key="$route.fullPath"></router-view>
+        </transition>
+
+
     </div>
-    <router-view />
-  </div>
 </template>
 
+<script>
+import Header from "./components/Header"
+//import stocks from './components/Stocks'
+
+    export default {
+        components:{
+            Header
+            //stocks
+        }
+    }
+</script>
+
 <style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
+ .slide-enter-active {
+        animation: slide-in 200ms ease-out forwards;
+    }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+    .slide-leave-active {
+        animation: slide-out 200ms ease-out forwards;
+    }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+    @keyframes slide-in {
+        from {
+            transform: translateY(-30px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
 </style>
